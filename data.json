@@ -223,6 +223,20 @@
           "timestamp": 1765830830386
         }
       ]
+    },
+    {
+      "id": "1765831282239",
+      "exerciseId": "1765831276137",
+      "user": "Elia",
+      "date": "2025-12-15",
+      "sets": [
+        {
+          "id": "mj7mcpj35vcvpjg3onr",
+          "weight": 52.5,
+          "reps": 8,
+          "timestamp": 1765831282239
+        }
+      ]
     }
   ]
 }
