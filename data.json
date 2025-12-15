@@ -6,13 +6,7 @@
       "category": "Chest"
     }
   ],
-  "eliaExercises": [
-    {
-      "id": "elia_ex_4",
-      "name": "Overhead Press",
-      "category": "Shoulders"
-    }
-  ],
+  "eliaExercises": [],
   "logs": [
     {
       "id": "1765788784632",
