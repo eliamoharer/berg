@@ -72,9 +72,18 @@ const githubRequest = async (endpoint: string, token: string, options: RequestIn
 
 // Migrate legacy data format (shared exercises) to new per-user format
 const migrateData = (data: any): AppData => {
-  // If already in new format, return as-is
-  if (data.adamExercises && data.eliaExercises) {
-    return data as AppData;
+  // Ensure we have valid arrays even if data is malformed
+  const adamExercises = data.adamExercises || [];
+  const eliaExercises = data.eliaExercises || [];
+  const logs = data.logs || [];
+
+  // If already in new format (both user exercise arrays exist and are non-empty, or no legacy exercises exist)
+  if ((adamExercises.length > 0 || eliaExercises.length > 0) || !data.exercises) {
+    return {
+      adamExercises,
+      eliaExercises,
+      logs
+    };
   }
 
   // Migrate from legacy shared exercises to per-user
@@ -82,7 +91,7 @@ const migrateData = (data: any): AppData => {
   return {
     adamExercises: sharedExercises.map(e => ({ ...e, id: `adam_${e.id}` })),
     eliaExercises: sharedExercises.map(e => ({ ...e, id: `elia_${e.id}` })),
-    logs: data.logs || []
+    logs
   };
 };
 
