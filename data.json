@@ -1,11 +1,5 @@
 {
-  "adamExercises": [
-    {
-      "id": "adam_ex_1",
-      "name": "Bench Press",
-      "category": "Chest"
-    }
-  ],
+  "adamExercises": [],
   "eliaExercises": [
     {
       "id": "1765829157474",
