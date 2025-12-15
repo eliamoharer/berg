@@ -546,7 +546,8 @@ const ComparisonView = ({ exercise }: { exercise: Exercise }) => {
   }, [exercise]);
 
   const load = async () => {
-    setLogs(await Storage.getAllLogsForExercise(exercise.id));
+    // Use exercise name to find matching exercises for both users
+    setLogs(await Storage.getLogsForComparison(exercise.name));
   };
 
   const chartData = logs.flatMap(log =>

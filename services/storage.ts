@@ -194,6 +194,22 @@ export const getLogsForExercise = async (exerciseId: string, user: User): Promis
     .sort((a, b) => b.date.localeCompare(a.date)); // Lexicographical sort works for ISO YYYY-MM-DD
 };
 
+// Get logs for comparison: finds exercises with matching name for both users
+export const getLogsForComparison = async (exerciseName: string): Promise<WorkoutLog[]> => {
+  const data = await loadData();
+
+  // Find matching exercises by name for each user
+  const adamExercise = data.adamExercises.find(e => e.name === exerciseName);
+  const eliaExercise = data.eliaExercises.find(e => e.name === exerciseName);
+
+  const matchingIds = [
+    adamExercise?.id,
+    eliaExercise?.id
+  ].filter(Boolean) as string[];
+
+  return data.logs.filter(l => matchingIds.includes(l.exerciseId));
+};
+
 export const getAllLogsForExercise = async (exerciseId: string): Promise<WorkoutLog[]> => {
   const data = await loadData();
   return data.logs.filter(l => l.exerciseId === exerciseId);
