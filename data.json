@@ -4,11 +4,6 @@
       "id": "adam_ex_1",
       "name": "Bench Press",
       "category": "Chest"
-    },
-    {
-      "id": "adam_ex_2",
-      "name": "Squat",
-      "category": "Legs"
     }
   ],
   "eliaExercises": [
