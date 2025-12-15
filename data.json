@@ -6,7 +6,13 @@
       "category": "Chest"
     }
   ],
-  "eliaExercises": [],
+  "eliaExercises": [
+    {
+      "id": "1765829157474",
+      "name": "Hack Squat",
+      "category": "General"
+    }
+  ],
   "logs": [
     {
       "id": "1765788784632",
