@@ -4,13 +4,16 @@ const STORAGE_KEY = 'ae_tracker_data';
 const CONFIG_KEY = 'ae_tracker_config';
 
 // Initial Seed Data
+const DEFAULT_EXERCISES: Exercise[] = [
+  { id: 'ex_1', name: 'Bench Press', category: 'Chest' },
+  { id: 'ex_2', name: 'Squat', category: 'Legs' },
+  { id: 'ex_3', name: 'Deadlift', category: 'Back' },
+  { id: 'ex_4', name: 'Overhead Press', category: 'Shoulders' },
+];
+
 const SEED_DATA: AppData = {
-  exercises: [
-    { id: 'ex_1', name: 'Bench Press', category: 'Chest' },
-    { id: 'ex_2', name: 'Squat', category: 'Legs' },
-    { id: 'ex_3', name: 'Deadlift', category: 'Back' },
-    { id: 'ex_4', name: 'Overhead Press', category: 'Shoulders' },
-  ],
+  adamExercises: DEFAULT_EXERCISES.map(e => ({ ...e, id: `adam_${e.id}` })),
+  eliaExercises: DEFAULT_EXERCISES.map(e => ({ ...e, id: `elia_${e.id}` })),
   logs: []
 };
 
@@ -67,6 +70,22 @@ const githubRequest = async (endpoint: string, token: string, options: RequestIn
   return res.json();
 };
 
+// Migrate legacy data format (shared exercises) to new per-user format
+const migrateData = (data: any): AppData => {
+  // If already in new format, return as-is
+  if (data.adamExercises && data.eliaExercises) {
+    return data as AppData;
+  }
+
+  // Migrate from legacy shared exercises to per-user
+  const sharedExercises: Exercise[] = data.exercises || [];
+  return {
+    adamExercises: sharedExercises.map(e => ({ ...e, id: `adam_${e.id}` })),
+    eliaExercises: sharedExercises.map(e => ({ ...e, id: `elia_${e.id}` })),
+    logs: data.logs || []
+  };
+};
+
 export const loadData = async (): Promise<AppData> => {
   const config = getConfig();
 
@@ -75,7 +94,8 @@ export const loadData = async (): Promise<AppData> => {
     try {
       const data = await githubRequest(`${config.owner}/${config.repo}/contents/${config.path}`, config.githubToken, { cache: 'no-store' });
       const content = atob(data.content);
-      dataCache = JSON.parse(content);
+      const parsed = JSON.parse(content);
+      dataCache = migrateData(parsed);
       // Sync to local backup
       localStorage.setItem(STORAGE_KEY, JSON.stringify(dataCache));
       return dataCache!;
@@ -87,7 +107,8 @@ export const loadData = async (): Promise<AppData> => {
   // 2. Fallback to LocalStorage
   const local = localStorage.getItem(STORAGE_KEY);
   if (local) {
-    dataCache = JSON.parse(local);
+    const parsed = JSON.parse(local);
+    dataCache = migrateData(parsed);
     return dataCache!;
   }
 
@@ -133,22 +154,27 @@ export const saveData = async (data: AppData): Promise<void> => {
 
 // --- Domain Helpers (Now Async Wrappers) ---
 
-export const getExercises = async (): Promise<Exercise[]> => {
+export const getExercisesForUser = async (user: User): Promise<Exercise[]> => {
   const data = await loadData();
-  return data.exercises;
+  return user === 'Adam' ? data.adamExercises : data.eliaExercises;
 };
 
-export const saveExercise = async (exercise: Exercise): Promise<void> => {
+export const saveExercise = async (exercise: Exercise, user: User): Promise<void> => {
   const data = await loadData();
-  const idx = data.exercises.findIndex(e => e.id === exercise.id);
-  if (idx >= 0) data.exercises[idx] = exercise;
-  else data.exercises.push(exercise);
+  const exercises = user === 'Adam' ? data.adamExercises : data.eliaExercises;
+  const idx = exercises.findIndex(e => e.id === exercise.id);
+  if (idx >= 0) exercises[idx] = exercise;
+  else exercises.push(exercise);
   await saveData(data);
 };
 
-export const deleteExercise = async (id: string): Promise<void> => {
+export const deleteExercise = async (id: string, user: User): Promise<void> => {
   const data = await loadData();
-  data.exercises = data.exercises.filter(e => e.id !== id);
+  if (user === 'Adam') {
+    data.adamExercises = data.adamExercises.filter(e => e.id !== id);
+  } else {
+    data.eliaExercises = data.eliaExercises.filter(e => e.id !== id);
+  }
   await saveData(data);
 };
 

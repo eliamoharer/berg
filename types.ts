@@ -38,7 +38,9 @@ export enum View {
 }
 
 export interface AppData {
-  exercises: Exercise[];
+  exercises?: Exercise[]; // Legacy: shared exercises (for migration)
+  adamExercises: Exercise[];
+  eliaExercises: Exercise[];
   logs: WorkoutLog[];
 }
 

@@ -1,22 +1,44 @@
 {
-    "exercises": [
+    "adamExercises": [
         {
-            "id": "ex_1",
+            "id": "adam_ex_1",
             "name": "Bench Press",
             "category": "Chest"
         },
         {
-            "id": "ex_2",
+            "id": "adam_ex_2",
             "name": "Squat",
             "category": "Legs"
         },
         {
-            "id": "ex_3",
+            "id": "adam_ex_3",
             "name": "Deadlift",
             "category": "Back"
         },
         {
-            "id": "ex_4",
+            "id": "adam_ex_4",
+            "name": "Overhead Press",
+            "category": "Shoulders"
+        }
+    ],
+    "eliaExercises": [
+        {
+            "id": "elia_ex_1",
+            "name": "Bench Press",
+            "category": "Chest"
+        },
+        {
+            "id": "elia_ex_2",
+            "name": "Squat",
+            "category": "Legs"
+        },
+        {
+            "id": "elia_ex_3",
+            "name": "Deadlift",
+            "category": "Back"
+        },
+        {
+            "id": "elia_ex_4",
             "name": "Overhead Press",
             "category": "Shoulders"
         }
