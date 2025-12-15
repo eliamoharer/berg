@@ -1,45 +1,47 @@
 {
-  "exercises": [
-    {
-      "id": "ex_1",
-      "name": "Bench Press",
-      "category": "Chest"
-    },
-    {
-      "id": "ex_2",
-      "name": "Squat",
-      "category": "Legs"
-    },
-    {
-      "id": "ex_3",
-      "name": "Deadlift",
-      "category": "Back"
-    },
-    {
-      "id": "ex_4",
-      "name": "Overhead Press",
-      "category": "Shoulders"
-    },
-    {
-      "id": "1765788170299",
-      "name": "wda",
-      "category": "General"
-    }
-  ],
-  "logs": [
-    {
-      "id": "1765788215667",
-      "exerciseId": "1765788170299",
-      "user": "Elia",
-      "date": "2025-12-15",
-      "sets": [
+    "adamExercises": [
         {
-          "id": "mj6wpn5ff8yy8zst3b",
-          "weight": 14,
-          "reps": 2,
-          "timestamp": 1765788215667
+            "id": "adam_ex_1",
+            "name": "Bench Press",
+            "category": "Chest"
+        },
+        {
+            "id": "adam_ex_2",
+            "name": "Squat",
+            "category": "Legs"
+        },
+        {
+            "id": "adam_ex_3",
+            "name": "Deadlift",
+            "category": "Back"
+        },
+        {
+            "id": "adam_ex_4",
+            "name": "Overhead Press",
+            "category": "Shoulders"
         }
-      ]
-    }
-  ]
+    ],
+    "eliaExercises": [
+        {
+            "id": "elia_ex_1",
+            "name": "Bench Press",
+            "category": "Chest"
+        },
+        {
+            "id": "elia_ex_2",
+            "name": "Squat",
+            "category": "Legs"
+        },
+        {
+            "id": "elia_ex_3",
+            "name": "Deadlift",
+            "category": "Back"
+        },
+        {
+            "id": "elia_ex_4",
+            "name": "Overhead Press",
+            "category": "Shoulders"
+        }
+    ],
+    "logs": []
 }
