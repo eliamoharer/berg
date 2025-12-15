@@ -26,5 +26,20 @@
       "category": "General"
     }
   ],
-  "logs": []
+  "logs": [
+    {
+      "id": "1765788215667",
+      "exerciseId": "1765788170299",
+      "user": "Elia",
+      "date": "2025-12-15",
+      "sets": [
+        {
+          "id": "mj6wpn5ff8yy8zst3b",
+          "weight": 14,
+          "reps": 2,
+          "timestamp": 1765788215667
+        }
+      ]
+    }
+  ]
 }
