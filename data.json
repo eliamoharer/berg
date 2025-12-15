@@ -1,5 +1,11 @@
 {
-  "adamExercises": [],
+  "adamExercises": [
+    {
+      "id": "1765830538842",
+      "name": "Incline dumbbell press",
+      "category": "General"
+    }
+  ],
   "eliaExercises": [
     {
       "id": "1765829157474",
