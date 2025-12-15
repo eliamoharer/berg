@@ -8,11 +8,6 @@
   ],
   "eliaExercises": [
     {
-      "id": "elia_ex_1",
-      "name": "Bench Press",
-      "category": "Chest"
-    },
-    {
       "id": "elia_ex_2",
       "name": "Squat",
       "category": "Legs"
