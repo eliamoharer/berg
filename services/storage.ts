@@ -41,16 +41,29 @@ let dataCache: AppData | null = null;
 
 // Helper to interact with GitHub API
 const githubRequest = async (endpoint: string, token: string, options: RequestInit = {}) => {
+  const headers: Record<string, string> = {
+    'Content-Type': 'application/json',
+    'Accept': 'application/vnd.github.v3+json',
+  };
+
+  // Only add auth if token is provided
+  if (token) {
+    headers['Authorization'] = `Bearer ${token}`;
+  }
+
   const res = await fetch(`https://api.github.com/repos/${endpoint}`, {
     ...options,
     headers: {
-      'Authorization': `Bearer ${token}`,
-      'Content-Type': 'application/json',
-      'Accept': 'application/vnd.github.v3+json',
-      ...options.headers,
+      ...headers,
+      ...(options.headers as Record<string, string> || {}),
     },
   });
-  if (!res.ok) throw new Error(`GitHub API Error: ${res.statusText}`);
+
+  if (!res.ok) {
+    const errorBody = await res.text();
+    console.error('GitHub API Error:', res.status, errorBody);
+    throw new Error(`GitHub API Error: ${res.status} - ${res.statusText}`);
+  }
   return res.json();
 };
 
@@ -85,7 +98,7 @@ export const loadData = async (): Promise<AppData> => {
 
 export const saveData = async (data: AppData): Promise<void> => {
   dataCache = data;
-  
+
   // Always save local backup immediately
   localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
 
@@ -102,7 +115,7 @@ export const saveData = async (data: AppData): Promise<void> => {
       }
 
       const content = btoa(JSON.stringify(data, null, 2));
-      
+
       await githubRequest(`${config.owner}/${config.repo}/contents/${config.path}`, config.githubToken, {
         method: 'PUT',
         body: JSON.stringify({
@@ -189,6 +202,6 @@ export const deleteSet = async (logId: string, setId: string): Promise<void> => 
   if (data.logs[logIndex].sets.length === 0) {
     data.logs = data.logs.filter(l => l.id !== logId);
   }
-  
+
   await saveData(data);
 };

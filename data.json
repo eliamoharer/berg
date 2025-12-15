@@ -1,1 +1,25 @@
-{}
+{
+    "exercises": [
+        {
+            "id": "ex_1",
+            "name": "Bench Press",
+            "category": "Chest"
+        },
+        {
+            "id": "ex_2",
+            "name": "Squat",
+            "category": "Legs"
+        },
+        {
+            "id": "ex_3",
+            "name": "Deadlift",
+            "category": "Back"
+        },
+        {
+            "id": "ex_4",
+            "name": "Overhead Press",
+            "category": "Shoulders"
+        }
+    ],
+    "logs": []
+}
