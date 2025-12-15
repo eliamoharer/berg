@@ -8,11 +8,6 @@
   ],
   "eliaExercises": [
     {
-      "id": "elia_ex_2",
-      "name": "Squat",
-      "category": "Legs"
-    },
-    {
       "id": "elia_ex_3",
       "name": "Deadlift",
       "category": "Back"
