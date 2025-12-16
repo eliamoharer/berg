@@ -1,5 +1,11 @@
 {
-  "adamExercises": [],
+  "adamExercises": [
+    {
+      "id": "1765845760496",
+      "name": "Hack Squat",
+      "category": "General"
+    }
+  ],
   "eliaExercises": [
     {
       "id": "1765829157474",
