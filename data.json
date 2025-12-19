@@ -697,6 +697,20 @@
           "timestamp": 1766016673326
         }
       ]
+    },
+    {
+      "id": "1766182681179",
+      "exerciseId": "1765845825073",
+      "user": "Adam",
+      "date": "2025-12-19",
+      "sets": [
+        {
+          "id": "mjdfkeorz47g197y4zq",
+          "weight": 470,
+          "reps": 7,
+          "timestamp": 1766182681179
+        }
+      ]
     }
   ]
 }
